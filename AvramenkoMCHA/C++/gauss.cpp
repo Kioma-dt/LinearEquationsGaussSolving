@@ -38,13 +38,16 @@ void nullColumn(std::vector<std::vector<double>> &A, std::vector<double> &b, int
 {
     for (int j = i + 1; j < A.size(); j++)
     {
-        double q = A[j][i] / A[i][i];
+        double q = std::round(A[j][i] / A[i][i] * 1e4) / 1e4;
 
         for (int k = i; k < A.size(); k++)
         {
-            A[j][k] -= q * A[i][k];
+            A[j][k] -= std::round(q * A[i][k] * 1e4) / 1e4;
+
+            A[j][k] = std::round(A[j][k] * 1e4) / 1e4;
         }
-        b[j] -= q * b[i];
+        b[j] -= std::round(q * b[i] * 1e4) / 1e4;
+        b[j] = std::round(b[j] * 1e4) / 1e4;
     }
 }
 
@@ -116,9 +119,9 @@ std::vector<double> backSubstitution(std::vector<std::vector<double>> A, std::ve
         double temp = 0;
         for (int j = i + 1; j < A.size(); j++)
         {
-            temp += A[i][j] * res[variablesSubstitution[j]];
+            temp += std::round(A[i][j] * res[variablesSubstitution[j]] * 1e4) / 1e4;
         }
-        res[variablesSubstitution[i]] = (b[i] - temp) / A[i][i];
+        res[variablesSubstitution[i]] = std::round((b[i] - temp) / A[i][i] * 1e4) / 1e4;
     }
     return res;
 }

@@ -44,9 +44,9 @@ int main()
     std::vector<double> b_cc = checkSolution(A, resChooseColumn);
     std::vector<double> b_cm = checkSolution(A, resChooseMatrix);
 
-    std::vector<double> resid1;
-    std::vector<double> resid2;
-    std::vector<double> resid3;
+    std::vector<double> resid1 = checkSolution(A, resGauss);
+    std::vector<double> resid2 = checkSolution(A, resChooseColumn);
+    std::vector<double> resid3 = checkSolution(A, resChooseMatrix);
 
     std::cout << "\n\nresid1: ";
     for (int i = 0; i < 5; i++)
